@@ -1,4 +1,4 @@
-# Sprint-Challenge: Intro to C and Processes
+# Sprint-Challenge: Intro to C and Processes 
 
 Complete both tasks below.
 
@@ -16,11 +16,18 @@ type `make` in the `examples/` directory.) It should print `Testing: PASS`.
 Add your answers inline, below, with your pull request.
 
 1. List all of the main states a process may be in at any point in time on a standard Unix system. Briefly explain what each of these states means.
+* Start: This is the initial state
+* Ready: proccess is ready to be assigned to a processor.
+* Running: self explanatory
+* Waiting: waiting for user input or resource to become available
+* Exit: Process finishes
 
 2. What is a zombie process? How does one get created? How does one get destroyed?
+* A child that terminates, but has not been waited for becomes a "zombie".  
+* Kill the parent to eliminate a zombie
 
 3. What are some of the benefits of working in a compiled language versus a non-compiled language? More specifically, what benefits are there to be had from taking the extra time to compile our code?
-
+* a comiled language don't require an interpreter. So it runs faster.
 
 ## Task 2
 
