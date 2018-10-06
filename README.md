@@ -16,10 +16,26 @@ type `make` in the `examples/` directory.) It should print `Testing: PASS`.
 Add your answers inline, below, with your pull request.
 
 1. List all of the main states a process may be in at any point in time on a standard Unix system. Briefly explain what each of these states means.
+  Start
+    Initial state of a process upon creation.
+  Ready
+    Process is started and awaiting to be assigned a processor. Upon computer startup the computer goes through and opens all the scheduled start up programs but while they can all be started by an initial process; they cannot be run until the OS assigns a processor to complete the scheduled process.
+  Running
+    Once a processor is assigned to the process, the process starts executing its instructions.
+  Waiting
+    Waiting is when a process goes into a waiting or standby state. This could be for a number of reasons; the program could be awaiting user input to continue executing its instructions. It could also be waiting for a resource to become available. (internet, data, file, another process to complete.)
+  Terminating
+    OS terminates the process once it completes its instructions, once in terminating or Exit state the process waits to be removed from memory, as it no longer needs to be taking up computer resources.
+
 
 2. What is a zombie process? How does one get created? How does one get destroyed?
+  A zombie process is a child process in exit status that is never read by the parent process. If a parent process doesn't contain a wait command to wait for the child process to terminate before terminating there is no parent process to reap the child. The child process will then just take up space on the process table, each zombie process has its own PID, and since Linux/Unix have a finite amount of PID's for assignment, with too many zombie processes no new processes can be opened.
+  To prevent zombie processes using the wait() system call in the parent process to wait for the child to terminate. The parent will then collect/reap the exit status of the child process and schedule it to be removed from the process table. 
+  To destroy a zombie process (since they are "dead" they cannot be killed by normal calls), you can sending a SIGCHLD signal to the parent; which will force the parent to perform wait() system call an subsequently reap it's zombie children. If that call does not work there is a problem with the parent process and you would need to kill the parent process directly; once the parent has been killed init adopts all the zombie children. init periodically calls wait() which will clean up the zombie children.
 
 3. What are some of the benefits of working in a compiled language versus a non-compiled language? More specifically, what benefits are there to be had from taking the extra time to compile our code?
+  Compiled languages typically run faster and are more efficient then non-compiled languages, this is because once compiled a program can be run any number of times without have to re-compiling the language unless changes are made. A non-compiled languages relies on an interpreter to run the program, and each time it is exectued the program must be parsed, interpreted, and then executed.
+  Since a program cannot be compiled until errors are resolved, this way you will never be able to run a compiled language program until errors are resolved allowing the compiler to compile.
 
 
 ## Task 2
